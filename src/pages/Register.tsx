@@ -3,8 +3,20 @@ import { Appbar } from "../components/Appbar"
 import { Button } from "../components/Button"
 import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
+import { useState } from "react"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export const Register = () =>{
+    
+    interface RegisterResponse {
+        token: string;
+    }
+
+    const[username , SetName] = useState("")
+    const[Email, SetEmail] = useState("")
+    const[Password , SetPassword] = useState("")
+    const[role , Setrole] = useState("")
 
     const Navigate = useNavigate()
 
@@ -27,13 +39,40 @@ export const Register = () =>{
         </div>
     
         <div >
-            <InputBox2 placeholder="Your Name..." label="Name" />
-            <InputBox2 placeholder="example@domain.com" label="Email" />
-            <InputBox2 placeholder="******" label="Password" />
-            <InputBox2 placeholder="role" label="Role" type="list" options={['Viewer','Organizer']} /> 
+            <InputBox2 onchange={(e)=>{
+                SetName(e.target.value)
+            }} placeholder="Your Name..." label="Name"  />
+
+            <InputBox2 onchange={(e)=>{
+                SetEmail(e.target.value)
+            }} placeholder="example@domain.com" label="Email" />
+
+            <InputBox2 onchange={(e)=>{
+                SetPassword(e.target.value)
+            }} placeholder="******" label="Password" />
+
+            <InputBox2 onchange={(e)=>{
+                Setrole(e.target.value)
+            }} placeholder="role" label="Role" type="list" options={['VIEWER','ORGANIZER']} /> 
            
+            
+
             <div className="flex flex-col items-center mt-8">
-                <Button label="Register" /> 
+                <Button onclick={async ()=>{
+                    try {
+                        const response = await axios.post<RegisterResponse>(`${BACKEND_URL}/auth/register`, {
+                            name : username,
+                            email : Email,
+                            password : Password,
+                            role : role
+                        })
+                        localStorage.setItem("token", response.data.token)
+                        Navigate("/events")    
+                    } catch (error) {
+                        console.log(error)
+                    }
+                    
+                }} label="Register" /> 
             </div>
         </div>
         </div>
