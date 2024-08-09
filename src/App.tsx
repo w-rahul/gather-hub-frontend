@@ -1,16 +1,22 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import { Register } from './pages/Register'
+import { Login } from './pages/Login'
+import { Events } from './pages/Events'
+import { SingleEvent } from './pages/SingleEvent'
 
 function App() {
 
-  return (
-    <>
-       <div className="p-4 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <h2 className="text-2xl font-bold text-center text-blue-500">Tailwind CSS with Vite</h2>
-      <p className="text-gray-700">This is a sample component to check Tailwind CSS integration with React and TypeScript using Vite.</p>
-      <button className="bg-blue-500 text-white px-4 py-2 rounded">Click Me</button>
-    </div>
-    </>
-  )
+  return <div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/register' element = {<Register />} />
+      <Route path='/login' element = {<Login />} />
+      <Route path='events' element = {<Events />} />
+      <Route path='/event/:id' element = {<SingleEvent />} />
+    </Routes>
+    </BrowserRouter>
+  </div>
 }
 
 export default App
