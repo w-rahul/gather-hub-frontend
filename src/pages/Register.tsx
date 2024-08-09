@@ -16,7 +16,7 @@ export const Register = () =>{
     const[username , SetName] = useState("")
     const[Email, SetEmail] = useState("")
     const[Password , SetPassword] = useState("")
-    const[role , Setrole] = useState("")
+    const[role , Setrole] = useState("VIEWER")
 
     const Navigate = useNavigate()
 

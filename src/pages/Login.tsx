@@ -3,8 +3,18 @@ import { Appbar } from "../components/Appbar"
 import { Button } from "../components/Button"
 import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
+import { useState } from "react"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export const Login = () => {
+
+    interface LoginToken {
+        token : string
+    }
+
+    const[Email, SetEmail] = useState("")
+    const[Password , SetPassword] = useState("")
 
         const Navigate = useNavigate()
 
@@ -27,11 +37,28 @@ export const Login = () => {
         </div>
     
         <div >
-            <InputBox2 placeholder="example@domain.com" label="Email" />
-            <InputBox2 placeholder="******" label="Password" />
+            <InputBox2 onchange={(e)=>{
+                SetEmail(e.target.value)
+            }} placeholder="example@domain.com" label="Email" />
+
+            <InputBox2 onchange={(e)=>{
+                SetPassword(e.target.value)
+            }} placeholder="******" label="Password" />
         
             <div className="flex flex-col items-center mt-8">
-                <Button label="Login" /> 
+                <Button onclick={async ()=>{
+                    try {
+                        const Response = await axios.post<LoginToken>(`${BACKEND_URL}/auth/login`,{
+                            email : Email,
+                            password : Password
+                        })
+                        localStorage.setItem("token", Response.data.token)
+                        Navigate("/events")    
+                    } catch (error) {
+                        console.log(error)
+                    }
+                    
+                }} label="Login" /> 
             </div>
         </div>
         </div>
