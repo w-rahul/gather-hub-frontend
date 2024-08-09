@@ -22,7 +22,7 @@ export const Login = () => {
         <div className="mb-6">
         <Heading  label="Login to your account" />
         <div className="max-w-sm">
-        <SubHeading label="Join the GatherHub community and start discovering exclsuive events" />
+        <SubHeading label="Join the GatherHub community and start discovering exclusive events" />
         </div>
         </div>
     
