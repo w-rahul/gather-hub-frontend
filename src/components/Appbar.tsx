@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Appbar = () =>{
+export const Appbar = ({label, onclick} : {label: string, onclick: ()=> void }) =>{
     return <div className=" flex justify-between px-10 py-4 bg-zinc-900">
         <div className='flex'>
         <header className="">
@@ -13,11 +13,10 @@ export const Appbar = () =>{
         </div>
         </div>
         <div className='mr-8 '>
-            <button className='bg-white text-black text-center w-20 py-2 font-semibold rounded-xl hover:bg-zinc-300'>Log in</button>
+        <button onClick={onclick} className='bg-white text-black text-center w-20 py-2 font-semibold rounded-xl hover:bg-zinc-300'>{label}  </button>    
         </div>
     </div>
 }
-
 
 interface GrabIconProps extends React.SVGProps<SVGSVGElement> {}
 
