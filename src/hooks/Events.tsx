@@ -16,6 +16,7 @@ export interface EVENTS {
             "name": string
         }
     }
+    "id": string
 }
 
 interface ApiResponse {

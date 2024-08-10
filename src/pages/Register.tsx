@@ -28,8 +28,14 @@ export const Register = () =>{
         </div>
      <div className="flex justify-center items-center w-full h-full bg-black text-white">
         
-    <div className="w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
-    style={{ boxShadow: '0 4px 6px rgba(255, 255, 255, 0.4)' }}
+    <div  className="w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
+                    style={{
+                        boxShadow: '0 4px 6px rgba(255, 255, 255, 0.4)',  
+                        position: 'absolute',  
+                        top: '50%', 
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'  
+                    }}
     >        
         <div className="mb-6">
         <Heading  label="Create your account" />
@@ -58,6 +64,7 @@ export const Register = () =>{
             
 
             <div className="flex flex-col items-center mt-8">
+                <div className="w-full">
                 <Button onclick={async ()=>{
                     try {
                         const response = await axios.post<RegisterResponse>(`${BACKEND_URL}/auth/register`, {
@@ -73,6 +80,7 @@ export const Register = () =>{
                     }
                     
                 }} label="Register" /> 
+                </div>
             </div>
         </div>
         </div>

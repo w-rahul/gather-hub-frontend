@@ -1,26 +1,64 @@
-export const Events = () =>{
-    return <div className="bg-black w-full h-screen">
-        <div className="text-white flex justify-between px-10 py-4 bg-zinc-900">
-        <div className='flex'>
-        <header className="">
-            <a href="#" className="">
-                <GrabIcon className="h-8 w-8" />
-            </a>
-        </header>
-        <div className="text-2xl font-bold ml-6 ">
-        GatherHub
-        </div>
-        </div>
-        <div className='mr-8 '>
-        <button  className='bg-white text-black text-center w-20 py-2 font-semibold rounded-xl hover:bg-zinc-300'>Hello</button>    
-        </div>
-    </div>
+import { useEffect } from "react";
+import { EventCard } from "../components/EventCard";
+import { useNavigate } from "react-router-dom";
+import { useEvents } from "../hooks/Events";
 
-    <div className="gird grid-cols-4">
+export const Events = () =>{
+
+    const letsGooo = useNavigate() 
+    const token = localStorage.getItem("token")
+    
+    useEffect(()=>{
+        if(!token){
+            alert("You are not LoggedIn")
+            letsGooo("/login")
+        }
+    },[token, letsGooo])
+
+    const {loading, events} = useEvents()
+
+    if(loading){
+        return <div>
+            Loading.....
+        </div>
+    }
+
+    return <div className="bg-black max-w-screen h-screen overflow-hidden">
+       <Appbartwo />
+    <div className="flex gird grid-cols-4 gap-10 p-10 max-w-screen">
+        {events.map((theprop) =><EventCard
+          key={theprop.id}
+          id={theprop.id}
+          title={theprop.title}
+          description= {theprop.description}
+          category={theprop.title}
+          date={theprop.date}
+          location={theprop.location}
+          organizerName={theprop.organizer.name}
+        />)}
         
     </div>    
 
     </div>
+}
+
+const Appbartwo =() =>{
+    return  <div className="text-white flex justify-between px-10 py-4 bg-zinc-900">
+    <div className='flex'>
+    <header className="">
+        <a href="#" className="">
+            <GrabIcon className="h-8 w-8" />
+        </a>
+    </header>
+    <div className="text-2xl font-bold ml-6 ">
+    GatherHub
+    </div>
+    </div>
+    <div className='mr-8 '>
+    <button  className='bg-white text-black text-center w-20 py-2 font-semibold rounded-xl hover:bg-zinc-300'>Hello</button>    
+    </div>
+</div>
+
 }
 
 interface GrabIconProps extends React.SVGProps<SVGSVGElement> {}

@@ -27,7 +27,13 @@ export const Login = () => {
      <div className="flex justify-center items-center w-full h-full bg-black text-white">
         
     <div className="w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
-    style={{ boxShadow: '0 4px 6px rgba(255, 255, 255, 0.4)' }}
+                    style={{
+                        boxShadow: '0 4px 6px rgba(255, 255, 255, 0.4)',  
+                        position: 'absolute',  
+                        top: '50%', 
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'  
+                    }}
     >        
         <div className="mb-6">
         <Heading  label="Login to your account" />
@@ -45,7 +51,8 @@ export const Login = () => {
                 SetPassword(e.target.value)
             }} placeholder="******" label="Password" />
         
-            <div className="flex flex-col items-center mt-8">
+            <div className="flex flex-col items-center mt-8 w-full">
+                <div className="w-full">
                 <Button onclick={async ()=>{
                     try {
                         const Response = await axios.post<LoginToken>(`${BACKEND_URL}/auth/login`,{
@@ -59,6 +66,7 @@ export const Login = () => {
                     }
                     
                 }} label="Login" /> 
+                </div>
             </div>
         </div>
         </div>
