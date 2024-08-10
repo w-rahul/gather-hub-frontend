@@ -14,7 +14,7 @@ export const Login = () => {
     }
 
     const[Email, SetEmail] = useState("")
-    const[Password , SetPassword] = useState("")
+    const[Password, SetPassword] = useState("")
 
         const Navigate = useNavigate()
 
