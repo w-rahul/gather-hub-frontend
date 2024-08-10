@@ -18,14 +18,14 @@ export const Events = () =>{
     const {loading, events} = useEvents()
 
     if(loading){
-        return <div>
+        return <div className="w-full h-screen flex items-center bg-black justify-center text-white font-bold text-3xl">
             Loading.....
         </div>
     }
-
-    return <div className="bg-black max-w-screen h-screen overflow-hidden">
+    
+    return <div className="bg-black min-h-screen ">
        <Appbartwo />
-    <div className="flex gird grid-cols-4 gap-10 p-10 max-w-screen">
+    <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-screen">
         {events.map((theprop) =><EventCard
           key={theprop.id}
           id={theprop.id}
@@ -35,8 +35,7 @@ export const Events = () =>{
           date={theprop.date}
           location={theprop.location}
           organizerName={theprop.organizer.name}
-        />)}
-        
+        />)} 
     </div>    
 
     </div>
