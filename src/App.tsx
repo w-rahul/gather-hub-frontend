@@ -3,7 +3,7 @@ import './App.css'
 import { Register } from './pages/Register'
 import { Login } from './pages/Login'
 import { Events } from './pages/Events'
-import { SingleEvent } from './pages/SingleEvent'
+import { FullEvent } from './pages/SingleEvent'
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
       <Route path='/register' element = {<Register />} />
       <Route path='/login' element = {<Login />} />
       <Route path='events' element = {<Events />} />
-      <Route path='/singleevent/' element = {<SingleEvent />} />
+      <Route path='event/:id' element = {<FullEvent />} />
     </Routes>
     </BrowserRouter>
   </div>
