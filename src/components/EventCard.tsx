@@ -26,7 +26,7 @@ export const EventCard = ({id, title, description, date, category, location, org
 
 
     return(
-      <Link to={`/${id}`} className="block max-w-sm w-full h-96 ">
+      <Link to={`/event/${id}`} className="block max-w-sm w-full h-96 ">
        <div className="rounded-2xl max-w-sm w-full h-64 bg-zinc-900 text-white grid grid-rows-[70%_40%] ">
         <div className="p-4 hover:bg-zinc-950">
           <div className="text-center font-bold text-xl line-clamp-1">
