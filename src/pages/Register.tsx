@@ -60,7 +60,7 @@ export const Register = () =>{
 
             <InputBox2 onchange={(e)=>{
                 SetPassword(e.target.value)
-            }} placeholder="******" label="Password" />
+            }} placeholder="******" type="password" label="Password" />
 
             <InputBox2 onchange={(e)=>{
                 Setrole(e.target.value)

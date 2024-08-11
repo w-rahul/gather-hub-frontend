@@ -56,7 +56,7 @@ export const Login = () => {
 
             <InputBox2 onchange={(e)=>{
                 SetPassword(e.target.value)
-            }} placeholder="******" label="Password" />
+            }} placeholder="******" type="password" label="Password" />
         
             <div className="flex flex-col items-center mt-8 w-full">
                 <div className="w-full">
