@@ -22,6 +22,7 @@ export const Events = () =>{
         return <div className="text-white w-full max-h-screen overflow-hidden">
                 <Appbar width="w-20" label="Logout" onclick={()=>{
                     localStorage.removeItem("token")
+                    letsGooo("/login")
                 }} />
          <div className="w-full h-screen flex items-center bg-black justify-center  font-bold text-3xl">
             Loading.....
@@ -29,9 +30,12 @@ export const Events = () =>{
     </div>
     }
     
-    return <div className="bg-black min-h-screen ">
-       <Appbar />
-    <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-scree">
+    return <div className="bg-black min-h-screen text-white ">
+       <Appbar width="w-20" label="Logout" onclick={()=>{
+                    localStorage.removeItem("token")
+                    letsGooo("/login")
+        }}/>
+    <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-screen">
         {events.map((theprop) =><EventCard
           key={theprop.id}
           id={theprop.id}
