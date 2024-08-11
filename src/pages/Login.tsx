@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { Appbar } from "../components/Appbar"
-import { Button } from "../components/Button"
 import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
+import { ButtonComp } from "../components/Button"
 
 export const Login = () => {
 
@@ -18,12 +18,19 @@ export const Login = () => {
 
         const Navigate = useNavigate()
 
+        const TokenValue :string | null = localStorage.getItem("token")
+
+    useEffect(()=>{
+        if(TokenValue){
+            Navigate("/events")
+        }
+    },[])
+
          return <div className="w-full h-screen bg-black text-white overflow-hidden">
-        <div>
             <Appbar onclick={()=>{
                 Navigate("/register")
             }} label="Register"/>
-        </div>
+        
      <div className="flex justify-center items-center w-full h-full bg-black text-white">
         
     <div className="w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
@@ -53,7 +60,7 @@ export const Login = () => {
         
             <div className="flex flex-col items-center mt-8 w-full">
                 <div className="w-full">
-                <Button onclick={async ()=>{
+                <ButtonComp onclick={async ()=>{
                     try {
                         const Response = await axios.post<LoginToken>(`${BACKEND_URL}/auth/login`,{
                             email : Email,

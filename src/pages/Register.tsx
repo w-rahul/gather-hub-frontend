@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { Appbar } from "../components/Appbar"
-import { Button } from "../components/Button"
 import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
+import { ButtonComp } from "../components/Button"
 
 export const Register = () =>{
     
@@ -19,6 +19,12 @@ export const Register = () =>{
     const[role , Setrole] = useState("VIEWER")
 
     const Navigate = useNavigate()
+    const TokenValue :string | null = localStorage.getItem("token")
+    useEffect(()=>{
+        if(TokenValue){
+            Navigate("/events")
+        }
+    },[])
 
     return <div className="w-full h-screen bg-black text-white overflow-hidden">
         <div>
@@ -64,7 +70,7 @@ export const Register = () =>{
 
             <div className="flex flex-col items-center mt-8">
                 <div className="w-full">
-                <Button onclick={async ()=>{
+                <ButtonComp  onclick={async ()=>{
                     try {
                         const response = await axios.post<RegisterResponse>(`${BACKEND_URL}/auth/register`, {
                             name : username,
