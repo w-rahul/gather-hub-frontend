@@ -41,7 +41,7 @@ export const Events = () =>{
     </div>
 }
 
-const Appbartwo =() =>{
+export const Appbartwo =() =>{
     return  <div className="text-white flex justify-between px-10 py-4 bg-zinc-900">
     <div className='flex'>
     <header className="">

@@ -13,7 +13,7 @@ function App() {
       <Route path='/register' element = {<Register />} />
       <Route path='/login' element = {<Login />} />
       <Route path='events' element = {<Events />} />
-      <Route path='/event/:id' element = {<SingleEvent />} />
+      <Route path='/singleevent/' element = {<SingleEvent />} />
     </Routes>
     </BrowserRouter>
   </div>
