@@ -25,7 +25,7 @@ export const Events = () =>{
     
     return <div className="bg-black min-h-screen ">
        <Appbartwo />
-    <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-screen">
+    <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-scree">
         {events.map((theprop) =><EventCard
           key={theprop.id}
           id={theprop.id}
