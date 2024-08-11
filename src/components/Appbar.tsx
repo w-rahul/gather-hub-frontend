@@ -1,7 +1,7 @@
 import { ButtonComp } from './Button';
 import { GrabIcon } from './Icon';
 
-export const Appbar = ({label, onclick}:{label?:string, onclick?:()=>void }) =>{
+export const Appbar = ({label, onclick, width}:{label?:string, onclick?:()=>void, width?:string }) =>{
     return <div className=" flex justify-between px-10 py-4 bg-zinc-900">
         <div className='flex'>
         <header className="">
@@ -14,7 +14,7 @@ export const Appbar = ({label, onclick}:{label?:string, onclick?:()=>void }) =>{
         </div>
         </div>
         <div className='mr-8 '>
-            <ButtonComp width='w-20' label={label} onclick={onclick} />
+            <ButtonComp width={width} label={label} onclick={onclick} />
         </div>
     </div>
 }

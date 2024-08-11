@@ -27,7 +27,7 @@ export const Login = () => {
     },[])
 
          return <div className="w-full h-screen bg-black text-white overflow-hidden">
-            <Appbar onclick={()=>{
+            <Appbar width="w-20" onclick={()=>{
                 Navigate("/register")
             }} label="Register"/>
         

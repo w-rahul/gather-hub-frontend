@@ -19,9 +19,14 @@ export const Events = () =>{
     const {loading, events} = useEvents()
 
     if(loading){
-        return <div className="w-full h-screen flex items-center bg-black justify-center text-white font-bold text-3xl">
+        return <div className="text-white w-full max-h-screen overflow-hidden">
+                <Appbar width="w-20" label="Logout" onclick={()=>{
+                    localStorage.removeItem("token")
+                }} />
+         <div className="w-full h-screen flex items-center bg-black justify-center  font-bold text-3xl">
             Loading.....
         </div>
+    </div>
     }
     
     return <div className="bg-black min-h-screen ">
