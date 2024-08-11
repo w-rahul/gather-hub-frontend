@@ -1,17 +1,47 @@
-import { useEffect } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { BACKEND_URL } from "../config"
 
-interface SingleEvent {
-    id : string
-    title : string
-    description : string
-    location : string
-    category : string
-    date : string
-    
+export interface SingleEventProps {
+    "id" : string
+    "title" : string
+    "description" : string
+    "location" : string
+    "category" : string
+    "date" : string
+    "organizer" :{
+        "name" : string
+    }
+    "registrations" :{
+        "user" :{
+            "name" : string
+        }
+    } 
 }
 
-const useSingleEvent = () =>{
-    useEffect(()=>{
+interface ApiResponse {
+    SpecificEvent : SingleEventProps
+}
 
+export const useSingleEvent = ({id} : { id: string}) =>{
+
+    const [loading, setLoading] = useState(true)
+    const [SingleEventdata , setSingleEvent] = useState<SingleEventProps | null >(null)
+
+    useEffect(()=>{
+        axios.get<ApiResponse>(`${BACKEND_URL}/event/${id}`, {
+            headers:{
+                Authorization : "Bearer " + localStorage.getItem("token")
+            }
+        })
+        .then((response)=>{
+            setSingleEvent(response.data.SpecificEvent)
+            setLoading(false)
+        })
     },[])
+
+    return {
+        loading,
+        SingleEventdata
+    }
 }
