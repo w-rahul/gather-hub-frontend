@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom"
 import { SingleEvent } from "../components/SingleEventCard"
 import { useSingleEvent } from "../hooks/SingleEvent"
-import { Appbartwo } from "./Events"
-
+import { Appbar } from "../components/Appbar"
 
 export const FullEvent = () =>{
 
@@ -17,7 +16,7 @@ export const FullEvent = () =>{
 
     return <div className="bg-black w-full h-screen overflow-hidden text-white">
         <div>
-            <Appbartwo />
+            <Appbar />
         </div>
         <div>
             <SingleEvent hello={SingleEventdata} />
