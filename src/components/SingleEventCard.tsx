@@ -1,7 +1,7 @@
 import { SingleEventProps } from "../hooks/SingleEvent"
 
 import { format } from 'date-fns';
-
+    
 export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const formatDate = (isoDate: string) => {
         const dateObj = new Date(isoDate);
