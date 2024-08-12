@@ -5,10 +5,15 @@ import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { UserIdFromToken } from "../hooks/UserIdFromToken"
 import { useNavigate } from "react-router-dom"
+import { TokenRole } from "../hooks/TokenRole"
 
 
 export const CreateEvent = () => {
     
+    interface ApiResponse {
+        id : string | ""
+    }
+
     const [title, settitle] = useState("") 
     const [description, setdescription] = useState("") 
     const [location, setlocation] = useState("") 
@@ -17,12 +22,13 @@ export const CreateEvent = () => {
     const Navigate = useNavigate()
 
     const UserIdByToken = UserIdFromToken()
+    const DecodedRole = TokenRole()
 
     const token = localStorage.getItem("token")
-    
+
     useEffect(()=>{
-        if(!token){
-            alert("You are not LoggedIn")
+        if(!token && DecodedRole !== "ORGANIZER" ){
+            alert("Access denied / Not Loggedin")
             Navigate("/login")
         }
     },[token, Navigate])
@@ -71,7 +77,7 @@ export const CreateEvent = () => {
         <div>
              <ButtonComp onclick={async ()=>{
                 try {
-                    await axios.post(`${BACKEND_URL}`,{
+                   const response = await axios.post<ApiResponse>(`${BACKEND_URL}/event`,{
                         title: title,
                         description: description,
                         date: date,
@@ -83,7 +89,7 @@ export const CreateEvent = () => {
                             Authorization : "Bearer " + localStorage.getItem("token")
                         }
                     })
-                    Navigate("/")
+                    Navigate(`/event/${(response.data.id)}`)
                 } catch (error) {
                       console.error("Error occured while creating event " + error)                  
                 }
