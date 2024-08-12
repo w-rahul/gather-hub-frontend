@@ -46,7 +46,9 @@ export const Events = () =>{
                     letsGooo("/login")
         }}/>
         {isOrganizer? <div className="flex justify-end mt-6 mr-16 left-0">
-            <ButtonComp width="w-24" label="Create" />
+            <ButtonComp onclick={()=>{
+                letsGooo("/event/publish")
+            }} width="w-24" label="Create" />
         </div>: null}
     <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-screen">
         {events.map((theprop) =><EventCard
