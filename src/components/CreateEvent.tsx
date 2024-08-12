@@ -94,7 +94,7 @@ export const CreateEvent = () => {
                       console.error("Error occured while creating event " + error)                  
                 }
 
-             }} label="Register" width="w-36"/>
+             }} label="Publish" width="w-36"/>
     </div>
                     </div>
                 </div>
