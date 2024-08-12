@@ -4,9 +4,10 @@ import { format } from 'date-fns';
 import { ButtonComp } from "./Button";
 import { TokenRole } from "../hooks/TokenRole";
 import { UserIdFromToken } from "../hooks/UserIdFromToken";
-import axios, { head } from "axios";
+import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
     
 export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const formatDate = (isoDate: string) => {
@@ -24,8 +25,62 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const DecodedUserId = UserIdFromToken()  
     const EventID = useParams() as {id : string}
 
-    
+    const [isRegistered, setisRegistered] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true);
 
+    interface ApiResponse {
+        registered : boolean
+    }
+
+    useEffect(()=>{
+        const CheckIsRegistered = async () =>{
+        try {
+            const response = await axios.get<ApiResponse>(`${BACKEND_URL}/registrations/${EventID.id}/${DecodedUserId}`, {
+                headers:{
+                    Authorization : "Bearer " + localStorage.getItem("token")
+                }
+            })
+            setisRegistered(response.data.registered)
+        
+        } catch (error) {
+                console.error("Error checking the registration" + error)
+
+        }finally {
+            setLoading(false); // Set loading to false once the request is complete
+        } 
+    }
+
+    CheckIsRegistered()
+
+},[EventID.id, DecodedUserId])
+
+    const eventhandler =  async () =>{
+            if(isRegistered){
+                return
+            }
+           try {
+            await axios.post(`${BACKEND_URL}/registrations/${EventID.id}`,{
+                userID : DecodedUserId,
+                eventID : EventID.id
+            }, {
+                headers:{
+                    Authorization : "Bearer " + localStorage.getItem("token")
+                }
+                
+            })       
+                setisRegistered(true);
+                alert("Successfully registered for the event");
+
+           } catch (error) {
+                alert("You are already registered / An error has been occured")
+           } 
+         }
+
+         if(loading){
+            return <div className="text-white">
+                Loading....
+            </div>
+         }
 
     return   <div className="h-screen flex items-center justify-center items w-full">
         <div className="mb-16 rounded-2xl w-1/3 max-h-screen min-h-96 grid p-2 grid-rows-[60%_40%] bg-zinc-900">
@@ -72,25 +127,10 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
                 </div>    
             </div>
             {DecodedRole == 'VIEWER' ? <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 ">
-                <ButtonComp onclick={async ()=>{
-                   try {
-                    axios.post(`${BACKEND_URL}/registrations/${EventID.id}`,{
-                        userID : DecodedUserId,
-                        eventID : EventID.id
-                    }, {
-                        headers:{
-                            Authorization : "Bearer " + localStorage.getItem("token")
-                        }
-                        
-                    })       
-                    alert("successfuly registered for the event")
-
-                   } catch (error) {
-                        alert("You are already registered / An error has been occured")
-                   } 
-                    
-                }} label="Register" width="w-40"/>
+                {!isRegistered? <ButtonComp onclick={eventhandler} label={"Register"} width="w-40"/> :
+                <ButtonComp label={"Registered"} width="w-40"/>}
             </div> : null}
         </div>
     </div>
 }
+

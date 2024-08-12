@@ -3,6 +3,8 @@ import { EventCard } from "../components/EventCard";
 import { useNavigate } from "react-router-dom";
 import { useEvents } from "../hooks/Events";
 import { Appbar } from "../components/Appbar";
+import { ButtonComp } from "../components/Button";
+import { TokenRole } from "../hooks/TokenRole";
 
 export const Events = () =>{
 
@@ -29,12 +31,23 @@ export const Events = () =>{
         </div>
     </div>
     }
+
+    
+    const OrganizerRole = TokenRole()
+        let isOrganizer: boolean | null = false 
+    if(OrganizerRole == 'ORGANIZER'){
+        isOrganizer = true
+    }
+
     
     return <div className="bg-black min-h-screen text-white ">
        <Appbar width="w-20" label="Logout" onclick={()=>{
                     localStorage.removeItem("token")
                     letsGooo("/login")
         }}/>
+        {isOrganizer? <div className="flex justify-end mt-6 mr-16 left-0">
+            <ButtonComp width="w-24" label="Create" />
+        </div>: null}
     <div className="grid grid-cols-4 gap-10 p-10 max-w-screen min-h-screen">
         {events.map((theprop) =><EventCard
           key={theprop.id}
