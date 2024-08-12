@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { InputBox2 } from "./Input"
 import { ButtonComp } from "./Button"
 import axios from "axios"
@@ -17,6 +17,16 @@ export const CreateEvent = () => {
     const Navigate = useNavigate()
 
     const UserIdByToken = UserIdFromToken()
+
+    const token = localStorage.getItem("token")
+    
+    useEffect(()=>{
+        if(!token){
+            alert("You are not LoggedIn")
+            Navigate("/login")
+        }
+    },[token, Navigate])
+
 
     return <div> 
      <div className="h-screen flex items-center justify-center items w-full">
