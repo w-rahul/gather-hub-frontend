@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { SingleEvent } from "../components/SingleEventCard"
 import { useSingleEvent } from "../hooks/SingleEvent"
 import { Appbar } from "../components/Appbar"
 
 export const FullEvent = () =>{
 
+    const Navigate = useNavigate()
     const {id} = useParams()
     const {loading, SingleEventdata} = useSingleEvent({id : id || ""})
 
@@ -15,8 +16,10 @@ export const FullEvent = () =>{
     }
 
     return <div className="bg-black w-full h-screen overflow-hidden text-white">
-        <div>
-            <Appbar />
+        <div><Appbar width="w-20" label="Logout" onclick={()=>{
+                    localStorage.removeItem("token")
+                    Navigate("/login")
+        }}/>
         </div>
         <div>
             <SingleEvent hello={SingleEventdata} />
