@@ -6,7 +6,7 @@ import { TokenRole } from "../hooks/TokenRole";
 import { UserIdFromToken } from "../hooks/UserIdFromToken";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
     
 export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
@@ -24,6 +24,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const DecodedRole = TokenRole()
     const DecodedUserId = UserIdFromToken()  
     const EventID = useParams() as {id : string}
+    const Navigate = useNavigate()
 
     const [isRegistered, setisRegistered] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(true);
@@ -126,10 +127,28 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
                     </div>
                 </div>    
             </div>
-            {DecodedRole == 'VIEWER' ? <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 ">
+            {DecodedRole == 'VIEWER' ? <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
                 {!isRegistered? <ButtonComp onclick={eventhandler} label={"Register"} width="w-40"/> :
                 <ButtonComp label={"Registered"} width="w-40"/>}
             </div> : null}
+            {DecodedRole == 'ORGANIZER' ?
+            <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
+            <ButtonComp onclick={async ()=>{
+                try {
+                    await axios.delete(`${BACKEND_URL}/event/${EventID.id}`,{
+                        headers:{
+                            Authorization : "Bearer " + localStorage.getItem("token")
+                        }
+                    })
+                    alert("Event Deleted Succeddfuly")
+                    Navigate("/events")
+                } catch (error) {
+                    console.error(error)
+                    alert("You are not authorized / Error deleting event")
+                }
+            }} label= "Delete" width="w-40"/> 
+            </div>
+            : null}
         </div>
     </div>
 }
