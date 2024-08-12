@@ -7,7 +7,7 @@ interface LabelledInput {
     placeholder: string
     type? : string
     options? : [string, string]
-    onchange: (e : React.ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>)=>void
+    onchange?: (e : React.ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>)=>void
  
 }
 
@@ -26,7 +26,7 @@ export const InputBox2 = ({ placeholder, label, type = "text", options, onchange
                 ) : (
                     <input
                         onChange={onchange}
-                        className="  bg-black w-full p-2.5 my-1"
+                        className="  bg-black w-full p-2.5 my-1 rounded-xl"
                         type={type}
                         placeholder={placeholder}
                         style={{ boxShadow: '0 4px 6px rgba(255, 255, 255, 0.1)' }}
