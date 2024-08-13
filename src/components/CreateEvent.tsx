@@ -105,17 +105,3 @@ export const CreateEvent = () => {
     
 </div>
 }
-
-// import { format } from 'date-fns';
-    
-// export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
-//     const formatDate = (isoDate: string) => {
-//         const dateObj = new Date(isoDate);
-//         const day = dateObj.getDate();
-//         const month = format(dateObj, 'MMMM');
-//         const suffix = ['th', 'st', 'nd', 'rd'][
-//             (day % 10 <= 3 && Math.floor(day / 10) !== 1) ? day % 10 : 0
-//         ];
-    
-//         return `${month} ${day}${suffix}`;
-//     };
