@@ -8,6 +8,5 @@ export const UserIdFromToken = () =>{
         const DecodedToken = jwtDecode(Token) as {id :string}
         UserID = DecodedToken.id || " " 
     }
-    
     return UserID
 }
