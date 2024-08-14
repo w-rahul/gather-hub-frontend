@@ -70,6 +70,7 @@ export const Login = () => {
                         Navigate("/events")    
                     } catch (error) {
                         console.log(error)
+                        alert("User not found / Invalid inputs")
                     }
                     
                 }} label="Login" /> 
