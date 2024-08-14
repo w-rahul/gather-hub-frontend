@@ -67,10 +67,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
                 return
             }
            try {
-            await axios.post(`${BACKEND_URL}/registrations/${EventID.id}`,{
-                userID : DecodedUserId,
-                eventID : EventID.id
-            }, {
+            await axios.post(`${BACKEND_URL}/registrations/${EventID.id}`,{}, {
                 headers:{
                     Authorization : "Bearer " + localStorage.getItem("token")
                 }
