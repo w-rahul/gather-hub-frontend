@@ -25,6 +25,9 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const DecodedUserId = UserIdFromToken()  
     const EventID = useParams() as {id : string}
     const Navigate = useNavigate()
+    const organizerId = hello.organizerId
+    const [EventOwner, setEventOwner] = useState(false)
+
 
     const [isRegistered, setisRegistered] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(true);
@@ -43,6 +46,10 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
             })
             setisRegistered(response.data.registered)
         
+            if(organizerId == DecodedUserId){
+                setEventOwner(true)
+            }
+
         } catch (error) {
                 console.error("Error checking the registration" + error)
 
@@ -131,7 +138,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
                 {!isRegistered? <ButtonComp onclick={eventhandler} label={"Register"} width="w-40"/> :
                 <ButtonComp label={"Registered"} width="w-40"/>}
             </div> : null}
-            {DecodedRole == 'ORGANIZER' ?
+            {DecodedRole == 'ORGANIZER' && EventOwner ?
             <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
             <ButtonComp onclick={async ()=>{
                 try {
