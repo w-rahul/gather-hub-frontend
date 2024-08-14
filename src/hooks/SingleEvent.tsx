@@ -9,6 +9,7 @@ export interface SingleEventProps {
     "location" : string
     "category" : string
     "date" : string
+    "organizerId" : string 
     "organizer" :{
         "name" : string
     }
