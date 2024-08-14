@@ -82,6 +82,7 @@ export const Register = () =>{
                         Navigate("/events")    
                     } catch (error) {
                         console.log(error)
+                        alert("Invalid inputs")
                     }
                     
                 }} label="Register" /> 
