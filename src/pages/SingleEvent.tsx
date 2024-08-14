@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { SingleEvent } from "../components/SingleEventCard"
 import { useSingleEvent } from "../hooks/SingleEvent"
 import { Appbar } from "../components/Appbar"
-import { ViewRigestered } from "../components/ViewRegistered"
-
 export const FullEvent = () =>{
 
     const Navigate = useNavigate()
