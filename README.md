@@ -29,16 +29,16 @@ gatherhub-frontend/
 │
 ├── public/ # Static assets <br>
 │
-├── src/ # Source code <br>
+├── src/    # Source code <br>
 │ ├── components/ # Reusable components <br>
-│ ├── pages/ # Page components <br>
-│ ├── hooks/ # Custom hooks <br>
-│ ├── styles/ # Global styles <br>
-│ ├── App.tsx # Main application component <br>
-│ ├── main.tsx # Entry point for React <br>
-│ └── config.ts # Configuration variables <br>
+│ ├── pages/    # Page components <br>
+│ ├── hooks/    # Custom hooks <br>
+│ ├── styles/   # Global styles <br>
+│ ├── App.tsx   # Main application component <br>
+│ ├── main.tsx  # Entry point for React <br>
+│ └── config.ts     # Configuration variables <br>
 │
-├── .gitignore # Git ignore file <br>
-├── tsconfig.json # TypeScript configuration <br>
-├── package.json # NPM package configuration <br>
-└── README.md # This file <br>
+├── .gitignore      # Git ignore file <br>
+├── tsconfig.json       # TypeScript configuration <br>
+├── package.json        # NPM package configuration <br>
+└── README.md       # This file <br>
