@@ -8,6 +8,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ViewRigestered } from "./ViewRegistered";
     
 export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const formatDate = (isoDate: string) => {
@@ -81,12 +82,6 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
            } 
          }
 
-         if(loading){
-            return <div className="text-white">
-                Loading....
-            </div>
-         }
-
     return   <div className="h-screen flex items-center justify-center items w-full">
         <div className="mb-16 rounded-2xl w-1/3 max-h-screen min-h-96 grid p-2 grid-rows-[60%_40%] bg-zinc-900">
             <div className="p-3">  
@@ -153,6 +148,9 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
             }} label= "Delete" width="w-40"/> 
             </div>
             : null}
+        </div>
+        <div className="absolute right-5 top-1/3">
+            <ViewRigestered />
         </div>
     </div>
 }
