@@ -1,5 +1,4 @@
 import { SingleEventProps } from "../hooks/SingleEvent"
-
 import { format } from 'date-fns';
 import { ButtonComp } from "./Button";
 import { TokenRole } from "../hooks/TokenRole";
@@ -9,6 +8,7 @@ import { BACKEND_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ViewRigestered } from "./ViewRegistered";
+import { useRegistrations } from "../hooks/Registrations";
     
 export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const formatDate = (isoDate: string) => {
@@ -28,10 +28,10 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const Navigate = useNavigate()
     const organizerId = hello.organizerId
     const [EventOwner, setEventOwner] = useState(false)
-
+    
+    const{loading, registrations} = useRegistrations({id : EventID.id || ""})
 
     const [isRegistered, setisRegistered] = useState<boolean>(false)
-    const [loading, setLoading] = useState<boolean>(true);
 
     interface ApiResponse {
         registered : boolean
@@ -54,9 +54,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
         } catch (error) {
                 console.error("Error checking the registration" + error)
 
-        }finally {
-            setLoading(false); // Set loading to false once the request is complete
-        } 
+        }
     }
 
     CheckIsRegistered()
@@ -150,7 +148,8 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
             : null}
         </div>
         <div className="absolute right-5 top-1/3">
-            <ViewRigestered />
+
+            <ViewRigestered registrations={registrations} />
         </div>
     </div>
 }
