@@ -27,7 +27,7 @@ Welcome to the GatherHub Frontend repository! This project is part of a fullstac
 
 gatherhub-frontend/
 │
-├── public/ # Static assets
+├── public/ # Static assets <br>
 │
 ├── src/ # Source code
 │ ├── components/ # Reusable components
