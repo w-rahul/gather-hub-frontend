@@ -6,11 +6,7 @@ Welcome to the GatherHub Frontend repository! This project is part of a fullstac
 
 - [Features](#features)
 - [Technologies](#technologies)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -25,22 +21,24 @@ Welcome to the GatherHub Frontend repository! This project is part of a fullstac
 - **Tailwind CSS**: A utility-first CSS framework for styling.
 - **Axios**: Promise-based HTTP client for making requests.
 - **React Router**: Declarative routing for React.js.
+- **date-fns** : For date formatting.
 
 ## Folder Structure
 
 gatherhub-frontend/
 │
-├── public/                # Static assets
-├── src/                   # Source code
-│   ├── components/        # Reusable components
-│   ├── pages/             # Page components
-│   ├── hooks/             # Custom hooks
-│   ├── styles/            # Global styles
-│   ├── App.tsx            # Main application component
-│   ├── main.tsx           # Entry point for React
-│   └── config.ts          # Configuration variables
+├── public/ # Static assets
 │
-├── .gitignore             # Git ignore file
-├── tsconfig.json          # TypeScript configuration
-├── package.json           # NPM package configuration
-└── README.md              # This file
+├── src/ # Source code
+│ ├── components/ # Reusable components
+│ ├── pages/ # Page components
+│ ├── hooks/ # Custom hooks
+│ ├── styles/ # Global styles
+│ ├── App.tsx # Main application component
+│ ├── main.tsx # Entry point for React
+│ └── config.ts # Configuration variables
+│
+├── .gitignore # Git ignore file
+├── tsconfig.json # TypeScript configuration
+├── package.json # NPM package configuration
+└── README.md # This file
