@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://gather-hub-bice.vercel.app/api"
+export const BACKEND_URL = "https://gather-hub.onrender.com/api/"
