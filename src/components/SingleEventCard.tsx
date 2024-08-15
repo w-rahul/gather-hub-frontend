@@ -28,7 +28,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     const organizerId = hello.organizerId
     const [EventOwner, setEventOwner] = useState(false)
     
-    const{loading, registrations} = useRegistrations({id : EventID.id || ""})
+    const{registrations} = useRegistrations({id : EventID.id || ""})
 
     const [isRegistered, setisRegistered] = useState<boolean>(false)
 
