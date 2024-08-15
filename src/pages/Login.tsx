@@ -5,8 +5,12 @@ import { InputBox2 } from "../components/Input"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { ButtonComp } from "../components/Button"
+import { useCustomTitle } from "../hooks/CustomTitle"
 
 export const Login = () => {
+
+    
+    useCustomTitle('GatherHub | Login')
 
     interface LoginToken {
         token : string

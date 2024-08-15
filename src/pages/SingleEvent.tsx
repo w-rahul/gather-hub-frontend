@@ -2,7 +2,11 @@ import { useNavigate, useParams } from "react-router-dom"
 import { SingleEvent } from "../components/SingleEventCard"
 import { useSingleEvent } from "../hooks/SingleEvent"
 import { Appbar } from "../components/Appbar"
+import { useCustomTitle } from "../hooks/CustomTitle"
 export const FullEvent = () =>{
+
+    
+    useCustomTitle('GatherHub | Event')
 
     const Navigate = useNavigate()
     const {id} = useParams()

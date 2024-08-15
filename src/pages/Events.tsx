@@ -5,8 +5,11 @@ import { useEvents } from "../hooks/Events";
 import { Appbar } from "../components/Appbar";
 import { ButtonComp } from "../components/Button";
 import { TokenRole } from "../hooks/TokenRole";
+import { useCustomTitle } from "../hooks/CustomTitle";
 
 export const Events = () =>{
+
+    useCustomTitle('GatherHub | Events')
 
     const letsGooo = useNavigate() 
     const token = localStorage.getItem("token")

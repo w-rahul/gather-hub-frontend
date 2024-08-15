@@ -1,8 +1,12 @@
 import { CreateEvent } from "../components/CreateEvent"
 import { useNavigate } from "react-router-dom"
 import { Appbar } from "../components/Appbar"
+import { useCustomTitle } from "../hooks/CustomTitle"
 
 export const PublishEvent = () =>{
+
+
+    useCustomTitle('GatherHub | Publish')
 
     const Navigate = useNavigate()
     
