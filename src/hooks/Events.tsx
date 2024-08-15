@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BACKEND_URL } from "../config"
 
 export interface EVENTS {
     "title" : string
@@ -28,7 +27,7 @@ export const useEvents = () =>{
     const [events , setevents] = useState<EVENTS[]>([])
 
     useEffect(()=>{
-        axios.get<ApiResponse>(`${BACKEND_URL}/event`, {
+        axios.get<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/event`, {
             headers:{
                 Authorization : "Bearer " + localStorage.getItem("token")
             }

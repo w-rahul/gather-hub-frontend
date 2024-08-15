@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { InputBox2 } from "./Input"
 import { ButtonComp } from "./Button"
 import axios from "axios"
-import { BACKEND_URL } from "../config"
 import { UserIdFromToken } from "../hooks/UserIdFromToken"
 import { useNavigate } from "react-router-dom"
 import { TokenRole } from "../hooks/TokenRole"
@@ -77,7 +76,7 @@ export const CreateEvent = () => {
         <div>
              <ButtonComp onclick={async ()=>{
                 try {
-                   const response = await axios.post<ApiResponse>(`${BACKEND_URL}/event`,{
+                   const response = await axios.post<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/event`,{
                         title: title,
                         description: description,
                         date: date,

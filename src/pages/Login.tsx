@@ -4,7 +4,6 @@ import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { BACKEND_URL } from "../config"
 import { ButtonComp } from "../components/Button"
 
 export const Login = () => {
@@ -56,13 +55,13 @@ export const Login = () => {
 
             <InputBox2 onchange={(e)=>{
                 SetPassword(e.target.value)
-            }} placeholder="******" type="password" label="Password" />
+            }} placeholder="******" label="Password" />
         
             <div className="flex flex-col items-center mt-8 w-full">
                 <div className="w-full">
                 <ButtonComp onclick={async ()=>{
                     try {
-                        const Response = await axios.post<LoginToken>(`${BACKEND_URL}/auth/login`,{
+                        const Response = await axios.post<LoginToken>(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,{
                             email : Email,
                             password : Password
                         })

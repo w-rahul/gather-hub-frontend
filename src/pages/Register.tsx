@@ -4,7 +4,6 @@ import { Heading, SubHeading } from "../components/Heading"
 import { InputBox2 } from "../components/Input"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { BACKEND_URL } from "../config"
 import { ButtonComp } from "../components/Button"
 
 export const Register = () =>{
@@ -72,7 +71,7 @@ export const Register = () =>{
                 <div className="w-full">
                 <ButtonComp  onclick={async ()=>{
                     try {
-                        const response = await axios.post<RegisterResponse>(`${BACKEND_URL}/auth/register`, {
+                        const response = await axios.post<RegisterResponse>(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, {
                             name : username,
                             email : Email,
                             password : Password,

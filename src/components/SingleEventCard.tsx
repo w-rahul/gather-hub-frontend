@@ -4,7 +4,6 @@ import { ButtonComp } from "./Button";
 import { TokenRole } from "../hooks/TokenRole";
 import { UserIdFromToken } from "../hooks/UserIdFromToken";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ViewRigestered } from "./ViewRegistered";
@@ -40,7 +39,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
     useEffect(()=>{
         const CheckIsRegistered = async () =>{
         try {
-            const response = await axios.get<ApiResponse>(`${BACKEND_URL}/registrations/${EventID.id}/${DecodedUserId}`, {
+            const response = await axios.get<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/registrations/${EventID.id}/${DecodedUserId}`, {
                 headers:{
                     Authorization : "Bearer " + localStorage.getItem("token")
                 }
@@ -66,7 +65,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
                 return
             }
            try {
-            await axios.post(`${BACKEND_URL}/registrations/${EventID.id}`,{}, {
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/registrations/${EventID.id}`,{}, {
                 headers:{
                     Authorization : "Bearer " + localStorage.getItem("token")
                 }
@@ -132,7 +131,7 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
             <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
             <ButtonComp onclick={async ()=>{
                 try {
-                    await axios.delete(`${BACKEND_URL}/event/${EventID.id}`,{
+                    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/event/${EventID.id}`,{
                         headers:{
                             Authorization : "Bearer " + localStorage.getItem("token")
                         }

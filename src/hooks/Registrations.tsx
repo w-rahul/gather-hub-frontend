@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BACKEND_URL } from "../config"
 
 export interface registrationsSchema {
     "user": {
@@ -19,7 +18,7 @@ export const useRegistrations = ({id} : {id :string}) =>{
 
     useEffect(()=>{
             try {
-                 axios.get<ApiResponse>(`${BACKEND_URL}/registrations/${id}`,{
+                 axios.get<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/registrations/${id}`,{
                     headers :{
                         Authorization : "Bearer " + localStorage.getItem("token")
                     }

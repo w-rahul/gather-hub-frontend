@@ -1,5 +1,3 @@
-// import { ChangeEvent } from "react"
-
 import { ChangeEvent } from "react"
 
 interface LabelledInput {

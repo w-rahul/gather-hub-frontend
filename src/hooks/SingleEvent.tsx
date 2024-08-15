@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { BACKEND_URL } from "../config"
 
 export interface SingleEventProps {
     "id" : string
@@ -30,7 +29,7 @@ export const useSingleEvent = ({id} : { id: string}) =>{
     const [SingleEventdata , setSingleEvent] = useState<SingleEventProps | null >(null)
 
     useEffect(()=>{
-        axios.get<ApiResponse>(`${BACKEND_URL}/event/${id}`, {
+        axios.get<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/event/${id}`, {
             headers:{
                 Authorization : "Bearer " + localStorage.getItem("token")
             }
