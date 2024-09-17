@@ -79,77 +79,74 @@ export const SingleEvent = ({hello}:{hello:SingleEventProps}) =>{
            } 
          }
 
-    return   <div className="h-screen flex items-center justify-center items w-full">
-        <div className="mb-16 rounded-2xl w-1/3 max-h-screen min-h-96 grid p-2 grid-rows-[60%_40%] bg-zinc-900">
-            <div className="p-3">  
-            <div className=" p-4 text-4xl font-bold font-serif">
-                {hello.title}
-            </div>
-            <div className="mb-6 px-6 py-1 h-36 overflow-y-auto font-mono"
-            style={{
-                scrollbarWidth: 'thin',
-                scrollbarColor: '#555 #2d2d2d',
-              }}>
-                {hello.description} 
-            </div>
-        </div>
-            <div className="">
-                <div className="border-t-2">
-                    <div className="mt-4 text-center grid grid-cols-2 grid-rows-2 h-full gap-8 text-md font-semibold font-serif">
-                    <div className="h-full">
-                        Category 
-                        <div className="font-mono font-thin">
-                        {hello.category} 
-                        </div>
-                        </div>
-                    <div className=" h-full">
-                        Location
-                        <div className="font-mono font-thin">
-                        {hello.location}
-                        </div>
-                    </div>
-                    <div className="h-full">
-                        Date
-                        <div className="font-mono font-thin">
-                        {formatDate(hello.date)}
-                        </div>
-                        </div>
-                    <div className="h-full">
-                        Organizer
-                        <div className="font-mono font-thin">
-                        {hello.organizer.name}
-                        </div>
-                        </div>
-                    </div>
-                </div>    
-            </div>
-            {DecodedRole == 'VIEWER' ? <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
-                {!isRegistered? <ButtonComp onclick={eventhandler} label={"Register"} width="w-40"/> :
-                <ButtonComp label={"Registered"} width="w-40"/>}
-            </div> : null}
-            {DecodedRole == 'ORGANIZER' && EventOwner ?
-            <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
-            <ButtonComp onclick={async ()=>{
-                try {
-                    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/event/${EventID.id}`,{
-                        headers:{
-                            Authorization : "Bearer " + localStorage.getItem("token")
-                        }
-                    })
-                    alert("Event Deleted Succeddfuly")
-                    Navigate("/events")
-                } catch (error) {
-                    console.error(error)
-                    alert("You are not authorized / Error deleting event")
-                }
-            }} label= "Delete" width="w-40"/> 
-            </div>
-            : null}
-        </div>
-        <div className="absolute right-5 top-1/3">
-
-            <ViewRigestered registrations={registrations} />
-        </div>
-    </div>
-}
-
+         return <div className="min-h-screen flex flex-col md:flex-row items-start justify-center w-full p-4 space-y-8 md:space-y-0 md:space-x-8">
+         <div className="rounded-2xl w-full md:w-1/2 lg:w-1/3 min-h-[600px] flex flex-col bg-zinc-900">
+             <div className="flex-grow p-3">  
+                 <div className="p-4 text-2xl md:text-4xl font-bold font-serif">
+                     {hello.title}
+                 </div>
+                 <div className="mb-6 px-6 py-1 h-36 overflow-y-auto font-mono text-sm md:text-base"
+                 style={{
+                     scrollbarWidth: 'thin',
+                     scrollbarColor: '#555 #2d2d2d',
+                 }}>
+                     {hello.description} 
+                 </div>
+                 <div className="border-t-2 mt-4">
+                     <div className="mt-4 text-center grid grid-cols-2 grid-rows-2 gap-4 md:gap-8 text-sm md:text-md font-semibold font-serif">
+                         <div>
+                             Category 
+                             <div className="font-mono font-thin">
+                             {hello.category} 
+                             </div>
+                         </div>
+                         <div>
+                             Location
+                             <div className="font-mono font-thin">
+                             {hello.location}
+                             </div>
+                         </div>
+                         <div>
+                             Date
+                             <div className="font-mono font-thin">
+                             {formatDate(hello.date)}
+                             </div>
+                         </div>
+                         <div>
+                             Organizer
+                             <div className="font-mono font-thin">
+                             {hello.organizer.name}
+                             </div>
+                         </div>
+                     </div>
+                 </div>    
+             </div>
+             <div className="p-4 flex justify-center">
+                 {DecodedRole == 'VIEWER' ? (
+                     !isRegistered ? 
+                     <ButtonComp onclick={eventhandler} label={"Register"} width="w-40"/> :
+                     <ButtonComp label={"Registered"} width="w-40"/>
+                 ) : null}
+                 {DecodedRole == 'ORGANIZER' && EventOwner ? (
+                     <ButtonComp onclick={async ()=>{
+                         try {
+                             await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/event/${EventID.id}`,{
+                                 headers:{
+                                     Authorization : "Bearer " + localStorage.getItem("token")
+                                 }
+                             })
+                             alert("Event Deleted Successfully")
+                             Navigate("/events")
+                         } catch (error) {
+                             console.error(error)
+                             alert("You are not authorized / Error deleting event")
+                         }
+                     }} label= "Delete" width="w-40"/> 
+                 ) : null}
+             </div>
+         </div>
+         <div className="w-full md:w-1/3">
+             <ViewRigestered registrations={registrations} />
+         </div>
+     </div>
+ }
