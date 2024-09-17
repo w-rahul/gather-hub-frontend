@@ -1,106 +1,92 @@
-import { useEffect, useState } from "react"
-import { InputBox2 } from "./Input"
-import { ButtonComp } from "./Button"
-import axios from "axios"
-import { UserIdFromToken } from "../hooks/UserIdFromToken"
-import { useNavigate } from "react-router-dom"
-import { TokenRole } from "../hooks/TokenRole"
-
+import { useEffect, useState } from "react";
+import { InputBox2 } from "./Input";
+import { ButtonComp } from "./Button";
+import axios from "axios";
+import { UserIdFromToken } from "../hooks/UserIdFromToken";
+import { useNavigate } from "react-router-dom";
+import { TokenRole } from "../hooks/TokenRole";
 
 export const CreateEvent = () => {
-    
     interface ApiResponse {
-        id : string | ""
+        id: string | "";
     }
 
-    const [title, settitle] = useState("") 
-    const [description, setdescription] = useState("") 
-    const [location, setlocation] = useState("") 
-    const [Category, setCategory] = useState("") 
-    const [date, setdate] = useState("")
-    const Navigate = useNavigate()
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [location, setLocation] = useState("");
+    const [category, setCategory] = useState("");
+    const [date, setDate] = useState("");
+    const Navigate = useNavigate();
 
-    const UserIdByToken = UserIdFromToken()
-    const DecodedRole = TokenRole()
+    const UserIdByToken = UserIdFromToken();
+    const DecodedRole = TokenRole();
+    const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token")
-
-    useEffect(()=>{
-        if(!token && DecodedRole !== "ORGANIZER" ){
-            alert("Access denied / Not Loggedin")
-            Navigate("/login")
+    useEffect(() => {
+        if (!token || DecodedRole !== "ORGANIZER") {
+            alert("Access denied / Not Logged in");
+            Navigate("/login");
         }
-    },[token, Navigate])
+    }, [token, Navigate, DecodedRole]);
 
-
-    return <div> 
-     <div className="h-screen flex items-center justify-center items w-full">
-        <div className="rounded-2xl w-1/3 max-h-screen min-h-96 grid p-2 grid-rows-[55%_50%] bg-zinc-900">
-         <div className="p-3">  
-        <div className=" p-4 text-4xl font-bold font-serif">
-        <InputBox2 onchange={(e)=>{
-            settitle(e.target.value)
-        }} label="Title" placeholder="Add your Title"/>
-        </div>
-        <div className="mb-6 px-6 py-1 h-36 overflow-y-auto font-mono">
-        <InputBox2 onchange={(e)=>{
-          setdescription(e.target.value)
-        }} label="Description" placeholder="Add your Description" />
-        </div>
-    </div>
-        <div className="">
-         <div className="border-t-2">
-            <div className="font-mono px-8 mt-4 text-center grid grid-cols-2 grid-rows-2 h-full gap-8 text-md font-semibold">
-                <div className="h-full">
-                    <InputBox2 onchange={(e)=>{
-          setCategory(e.target.value)
-        }} label="Category" placeholder="Add Category" />
-                    </div>
-
-                    <div className="h-full">
-                    <InputBox2 onchange={(e)=>{
-          setlocation(e.target.value)
-        }} label="Location" placeholder="Add Location" />
-                    </div>
-
-                    <div className="h-full">
-                    <InputBox2 onchange={(e)=>{
-          setdate(e.target.value)
-        }} label="Date" type="date" placeholder="Add Date" />
-                    </div>
-
-                    <div className=" h-full flex justify-center mt-9">
-                    {/* <InputBox2 onchange={(e)=>{
-            setname(e.target.value)
-        }} label="Name" placeholder="Add Organizer Name" /> */}
-        <div>
-             <ButtonComp onclick={async ()=>{
-                try {
-                   const response = await axios.post<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/event`,{
-                        title: title,
-                        description: description,
-                        date: date,
-                        location: location,
-                        category: Category,
-                        organizerId : UserIdByToken
-                    },{
-                        headers:{
-                            Authorization : "Bearer " + localStorage.getItem("token")
-                        }
-                    })
-                    Navigate(`/event/${(response.data.id)}`)
-                } catch (error) {
-                      console.error("Error occured while creating event " + error)                  
+    const handlePublish = async () => {
+        try {
+            const response = await axios.post<ApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/event`, {
+                title,
+                description,
+                date,
+                location,
+                category,
+                organizerId: UserIdByToken
+            }, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 }
+            });
+            Navigate(`/event/${response.data.id}`);
+        } catch (error) {
+            console.error("Error occurred while creating event", error);
+        }
+    };
 
-             }} label="Publish" width="w-36"/>
-    </div>
-                    </div>
+    return (
+        <div className="min-h-screen bg-black text-white p-4 flex flex-col items-center">
+            <div className="w-full max-w-md bg-zinc-900 p-6 rounded-lg shadow-lg">
+                <h1 className="text-2xl font-bold mb-4 text-center">Create New Event</h1>
+                <InputBox2
+                    onchange ={(e) => setTitle(e.target.value)}
+                    label="Title"
+                    placeholder="Add your Title"
+                />
+                <InputBox2
+                    onchange ={(e) => setDescription(e.target.value)}
+                    label="Description"
+                    placeholder="Add your Description"
+                />
+                <InputBox2
+                    onchange ={(e) => setCategory(e.target.value)}
+                    label="Category"
+                    placeholder="Add Category"
+                />
+                <InputBox2
+                    onchange ={(e) => setLocation(e.target.value)}
+                    label="Location"
+                    placeholder="Add Location"
+                />
+                <InputBox2
+                    onchange ={(e) => setDate(e.target.value)}
+                    label="Date"
+                    type="date"
+                    placeholder="Add Date"
+                />
+                <div className="mt-4 text-center">
+                    <ButtonComp
+                        onclick={handlePublish}
+                        label="Publish"
+                        width="w-36"
+                    />
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    
-</div>
-}
+    );
+};
