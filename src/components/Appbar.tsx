@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import { ButtonComp } from './Button';
-import { GrabIcon } from './Icon';
+import { Link } from 'react-router-dom'
+import { ButtonComp } from './Button'
+import { GrabIcon } from './Icon'
 
-export const Appbar = ({label, onclick, width}:{label?:string, onclick?:()=>void, width?:string }) =>{
-    return <div className=" flex justify-between px-10 py-4 bg-zinc-900">
+export const Appbar = ({label, onclick, width}:{label?:string, onclick?:()=>void, width?:string }) => {
+    return <div className=" flex justify-between px-10 py-4 bg-zinc-900 z-10 relative">
         <div className='flex'>
         <header className="">
             <a href="#" className="">
@@ -21,4 +21,3 @@ export const Appbar = ({label, onclick, width}:{label?:string, onclick?:()=>void
         </div>
     </div>
 }
-
