@@ -36,7 +36,7 @@ export const Login = () => {
         
      <div className="flex justify-center items-center w-full h-full bg-black text-white">
         
-    <div className="w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
+    <div className="w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12 h-auto bg-zinc-900 p-9 rounded-xl"
                     style={{
                         boxShadow: '0 4px 6px rgba(255, 255, 255, 0.4)',  
                         position: 'absolute',  
